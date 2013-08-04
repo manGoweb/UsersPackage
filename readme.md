@@ -16,9 +16,10 @@ Vytvoření nového balíčku:
 --------
 - Naklonujte tento repozitář
 - Změňte jméno a popis balíčku v souboru `composer.json`
-- Změňte namespace a výchozí parametry routeru v `app\Router.php`.
-- Změňte namespace třídy `Package` a namespace routeru v adresáři `app\Package.php`.
-- Případně upravte další nastavení v metodě `Package::register()`.
+- Změňte namespace a výchozí parametry routeru v `app\Router.php`
+- Změňte namespace třídy `Package` a namespace routeru v adresáři `app\Package.php`
+- Případně upravte další nastavení v metodě `Package::register()`
+- Upravte toto readme, ale uveďte odkaz na původní verzi (https://github.com/Clevis/SkeletonPackage/blob/master/readme.md)
 
 
 Instalace balíčku:
