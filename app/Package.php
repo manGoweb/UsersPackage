@@ -3,6 +3,7 @@
 namespace Package;
 
 use Package\Router;
+use Nette;
 
 
 class Package
@@ -15,6 +16,7 @@ class Package
 	 */
 	public static function register(Nette\Configurator $configurator)
 	{
+		/** @var Nette\DI\Container $container */
 		$configurator->onAfter[] = function ($container) {
 			// registrace rout
 			$container->router[] = new Router($container);
