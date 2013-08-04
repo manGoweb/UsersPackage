@@ -1,8 +1,9 @@
 <?php
 
-namespace Package; // todo: změň při vytvoření balíčku
 
-use Package\Router; // todo: změň při vytvoření balíčku
+namespace Clevis\Users;
+
+use Clevis\Users\Router;
 use Nette\Configurator;
 use Nette\DI\Container;
 

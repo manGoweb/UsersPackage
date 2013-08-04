@@ -4,7 +4,6 @@ Users package for Skeleton21
 
 Balíček funkcionality pro přihlašování a správu uživatelů.
 
-
 -----
 
 
