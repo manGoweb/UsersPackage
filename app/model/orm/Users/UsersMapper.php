@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace Clevis\Users;
+
+use Clevis\Skeleton\Mapper;
 
 
 /**
