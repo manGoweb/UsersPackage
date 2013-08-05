@@ -1,16 +1,17 @@
 <?php
 
-namespace App;
+namespace Clevis\Users;
 
 use Nette;
+use Nette\Forms\Form;
+use Clevis\Skeleton\BasePresenter;
 
 
 /**
- * Sign in/out presenters.
+ * Sign in/out presenter.
  */
 class SignPresenter extends BasePresenter
 {
-
 
 	/**
 	 * Sign-in form factory.
@@ -39,7 +40,7 @@ class SignPresenter extends BasePresenter
 	}
 
 
-	public function signInFormSucceeded($form)
+	public function signInFormSucceeded(Form $form)
 	{
 		$values = $form->getValues();
 
