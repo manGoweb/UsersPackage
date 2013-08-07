@@ -30,7 +30,7 @@ class Package
 			//self::registerRepository($container, 'name', __NAMESPACE__ . '\\RepositoryClass');
 
 			// registrace služeb
-			//self::registerService($container, 'name', 'Service\\Class\\Name'); // třída
+			//self::registerService($container, 'name', new Service\Class\Name); // služba
 			//self::registerService($container, 'name', $container->createInstance('Service\\Class\\Name')); // autowiring
 		};
 	}
@@ -51,8 +51,29 @@ class Package
 	 */
 	public static function registerService(Container $container, $name, $service)
 	{
+		static $param;
+
 		if (!$container->hasService($name))
 		{
+			// black magic!
+			if (!$param)
+			{
+				$ref = new \ReflectionClass($container);
+				$param = $ref->getProperty('meta');
+				$param->setAccessible(TRUE);
+			}
+			$meta = $param->getValue($container);
+
+			$class = get_class($service);
+			foreach (class_parents($class) + class_implements($class) + array($class) as $parent) {
+				$parent = strtolower($parent);
+				if (empty($meta[Container::TYPES][$parent]) || !in_array($name, $meta[Container::TYPES][$parent]))
+				{
+					$meta[Container::TYPES][$parent][] = (string) $name;
+				}
+			}
+			$param->setValue($container, $meta);
+
 			$container->addService($name, $service);
 		}
 	}
