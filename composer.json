@@ -17,6 +17,6 @@
 	},
 
 	"autoload": {
-		"classmap": ["app/"]
+		"classmap": ["app/", "tests/se34"]
 	}
 }
