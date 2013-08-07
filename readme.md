@@ -17,7 +17,7 @@ Vytvoření nového balíčku:
 - Naklonujte tento repozitář
 - Změňte jméno a popis balíčku v souboru `composer.json`
 - Změňte namespace a výchozí parametry routeru v `app\Router.php`
-- Změňte namespace třídy `Package` a namespace routeru v adresáři `app\Package.php`
+- Změňte namespace třídy `Package` a namespace routeru v souboru `app\Package.php`
 - Případně upravte další nastavení v metodě `Package::register()` (registrace služeb, repozitářů atp.)
 - Upravte toto readme, ale uveďte odkaz na původní verzi (https://github.com/Clevis/SkeletonPackage/blob/master/readme.md)
 
@@ -59,17 +59,27 @@ Struktura balíčku:
 
 Rozšiřitelnost:
 ---------------
-- Routy: Routy balíčku se registrují až po routách projektu, což zajistí, že je lze v projektu přetížit. (Canonicalizace přetížených rout zatím není vyřešena)
-- Presentery: `PresenterFactory` hledá třídu presenteru nejdríve ve jmenném prostoru aplikace, až poté ve jmenném prostoru balíčku (ten se v `PresenterFactory` musí registrovat)
-	- Presentery v balíčku musí dědit od třídy `Clevis\Skeleton\BasePresenter`
+- Routy:
+	- routy balíčku se registrují až po routách projektu
+	- to zajistí, že je lze v projektu přetížit
+	- (canonicalizace přetížených rout zatím není vyřešena)
+- Presentery:
+	- `PresenterFactory` hledá třídu presenteru nejdríve ve jmenném prostoru aplikace, až poté ve jmenném prostoru balíčku (ten se v `PresenterFactory` musí registrovat)
+	- presentery v balíčku musí dědit od třídy `Clevis\Skeleton\BasePresenter`
+	- presentery by neměly rozšiřovat presenter z jiného balíčku (raději použijte kompozici nebo traity)
 - Šablony: `TemplateFactory` hledá šablony nejdříve v adresáři aplikace, pak teprve v adresáři balíčku
-- Komponenty: komponenty lze přetížit jejich nahrazením v `ServiceContaineru`
-- Helpery: (zatím nelze)
+	- aplikační šablona tedy může rozšiřovat šablonu z balíčku, aniž by bylo třeba cokoliv nastavovat
+	- pro zjednodušení jsou šablony z balíčku zkopírovány do adresáře `/app[/Module]/templates/{Presenter}/package/`
+- Komponenty:
+	- služby definované aplikací mají přednost před službami v balíčku
+	- službu z balíčku tedy lze přebít uvedením služby v konfiguráku aplikace
+- Helpery:
+	- (zatím není nijak vyřešeno)
 
 
 Testy:
 ------
-- Testy v balíčku musí dědit od `Tests\Unit\TestCase` nebo `Test\Selenium\SeleniumTestCase` (nejspíše se změní)
+- Testy v balíčku by měly dědit od `Tests\Unit\TestCase` nebo `Test\Selenium\SeleniumTestCase` (nejspíše se změní)
 - Prozatím je počítáno pouze se spouštěním testů z prostředí *Skeletonu*
 
 
