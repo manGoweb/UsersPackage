@@ -1,7 +1,7 @@
 {
 	"name": "clevis/skeleton-package",
 	"type": "clevis-skeleton-package",
-	"description": "Skeleton of package for Skeleton21.",
+	"description": "Skeleton of packages for Skeleton21",
 	"homepage": "http://clevis.cz",
 	"license": "BSD-3-Clause",
 	"authors": [
@@ -13,12 +13,7 @@
 
 	"require": {
 		"php": ">= 5.3.7",
-		"nette/nette": "@dev",
-		"clevis/skeleton-package-installer": "*"
-	},
-	"require-dev": {
-		"phpunit/phpunit": ">=3.7.20",
-		"mockery/mockery": "dev-master"
+		"nette/nette": "@dev"
 	},
 
 	"autoload": {
