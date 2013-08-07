@@ -1,6 +1,6 @@
 <?php
 
-namespace Package;
+namespace Package; // todo: změň při vytvoření balíčku
 
 use Nette\DI\Container;
 use Nette\Application\Routers\Route;
@@ -13,7 +13,7 @@ use Nette\Application\Routers\RouteList;
 class Router extends RouteList
 {
 
-	public function __construct(Container $context, $module = 'Package', $prefix = 'package')
+	public function __construct($module = 'Package', $prefix = 'package')
 	{
 		parent::__construct($module);
 
