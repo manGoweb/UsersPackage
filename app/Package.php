@@ -10,7 +10,7 @@ use Nette\DI\Container;
 /**
  * Registrátor balíčku
  */
-class Package extends \Clevis\Skeleton\Package
+class Package
 {
 
 	/**
@@ -20,6 +20,9 @@ class Package extends \Clevis\Skeleton\Package
 	 */
 	public static function register(Configurator $configurator)
 	{
+		// registrace konfigurace
+		$configurator->addConfig(__DIR__ . '/config.neon', FALSE);
+
 		/** @var Container $container */
 		$configurator->onAfter[] = function (Container $container) {
 
@@ -28,13 +31,6 @@ class Package extends \Clevis\Skeleton\Package
 
 			// registrace jmenného prostoru presenterů
 			$container->getService('nette.presenterFactory')->registerNamespace(__NAMESPACE__);
-
-			// registrace repositářů
-			//self::registerRepository($container, 'name', __NAMESPACE__ . '\\RepositoryClass');
-
-			// registrace služeb
-			//self::registerService($container, 'name', new Service\Class\Name); // služba
-			//self::registerService($container, 'name', $container->createInstance('Service\\Class\\Name')); // autowiring
 		};
 	}
 
