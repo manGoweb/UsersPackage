@@ -19,6 +19,7 @@ Vytvoření nového balíčku:
 - Změňte namespace a výchozí parametry routeru v `app\Router.php`
 - Změňte namespace třídy `Package` a namespace routeru v souboru `app\Package.php`
 - Případně upravte další nastavení v metodě `Package::register()` (registrace služeb, repozitářů atp.)
+- Upravte výchozí konfiguraci balíčku v souboru `config.neon`
 - Upravte toto readme, ale uveďte odkaz na původní verzi (https://github.com/Clevis/SkeletonPackage/blob/master/readme.md)
 
 
@@ -64,15 +65,16 @@ Rozšiřitelnost:
 	- to zajistí, že je lze v projektu přetížit
 	- (canonicalizace přetížených rout zatím není vyřešena)
 - Presentery:
-	- `PresenterFactory` hledá třídu presenteru nejdríve ve jmenném prostoru aplikace, až poté ve jmenném prostoru balíčku (ten se v `PresenterFactory` musí registrovat)
+	- `PresenterFactory` hledá třídu presenteru nejdríve ve jmenném prostoru aplikace, až poté ve jmenném prostoru
+		balíčku (ten se v `PresenterFactory` musí registrovat)
 	- presentery v balíčku musí dědit od třídy `Clevis\Skeleton\BasePresenter`
 	- presentery by neměly rozšiřovat presenter z jiného balíčku (raději použijte kompozici nebo traity)
 - Šablony: `TemplateFactory` hledá šablony nejdříve v adresáři aplikace, pak teprve v adresáři balíčku
 	- aplikační šablona tedy může rozšiřovat šablonu z balíčku, aniž by bylo třeba cokoliv nastavovat
 	- pro zjednodušení jsou šablony z balíčku zkopírovány do adresáře `/app[/Module]/templates/{Presenter}/package/`
-- Komponenty:
-	- služby definované aplikací mají přednost před službami v balíčku
-	- službu z balíčku tedy lze přebít uvedením služby v konfiguráku aplikace
+- Služby a komponenty:
+	- služby se definují v konfiguračním souboru `config.neon`
+	- konfiguráky balíčku se načítají před konfiguráky aplikace, proto může aplikace výchozí nastavení upravit
 - Helpery:
 	- (zatím není nijak vyřešeno)
 
@@ -85,13 +87,12 @@ Testy:
 
 Migrace:
 --------
-- Balíček nesmí měnit nebo odebírat sloupce/tabulky/indexy atd., které sám nepřidal
-- Obecné pravidlo migrací je, že migrace se nesmí nikdy editovat
-- Migrace z balíčku je možné editovat právě jednou po připojení balíčku k projektu, aby se zabránilo případným kolizím
-	s migracemi z jiných balíčků či z projektu (jméno souboru se ale nesmí měnit)
-- Instalátor balíčku při jeho aktualizaci již jednou nainstalované migrace nepřepisuje
-- Migraci ale nelze odstranit (installer by ji opětovně přidal)
-- Pokud je třeba migraci vyřadit, je možné ji přepsat prázdným příkazem (např. `SELECT 1;`)
-- Při odinstalování balíčku zůstávají jeho migrace na místě. Migrace jsou nevratné a odebrat je nelze. Pokud je to nutné,
+- **Obecné pravidlo migrací je, že migrace se nesmí nikdy editovat. Každá úprava databáze musí být v novém souboru.**
+- Migrace z balíčku je ale možné editovat právě jednou po připojení balíčku k projektu, aby se zabránilo případným kolizím
+	s migracemi z jiných balíčků či z projektu. Instalátor balíčku totiž při jeho
+	aktualizaci **již jednou nainstalované migrace nepřepisuje**
+- **Soubor migrace nelze z aplikace odstranit** - instalátor by ho totiž při updatu opětovně přidal. Pokud je třeba
+	migraci vyřadit, je možné ji přepsat prázdným příkazem (např. `SELECT 1;`)
+- **Při odinstalování balíčku zůstávají jeho migrace na místě.** Migrace jsou nevratné a odebrat je nelze. Pokud je to nutné,
 	je třeba stav databáze změnit reverzní migrací
-
+- **Balíček nesmí měnit nebo odebírat sloupce/tabulky/indexy atd., které sám nepřidal**
