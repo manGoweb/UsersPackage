@@ -1,6 +1,6 @@
 <?php
 
-namespace Clevispace;
+namespace Clevis\Users;
 
 use Nette\Object;
 use Nette\Utils\Strings;

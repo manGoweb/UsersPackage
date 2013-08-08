@@ -1,11 +1,10 @@
 <?php
 
-namespace App;
+namespace Clevis\Users;
 
 use Nette\Object;
 use Nette\Security;
 use Orm\EntityToArray;
-use Clevispace\PasswordHashCalculator;
 
 
 /**
