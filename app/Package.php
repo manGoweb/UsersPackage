@@ -28,7 +28,7 @@ class Package
 		$configurator->onAfter[] = function (Container $container) {
 
 			// registrace rout
-			$container->router[] = new Router;
+			//$container->router[] = new Router;
 
 			// registrace jmenného prostoru presenterů
 			$container->getService('nette.presenterFactory')->registerNamespace(__NAMESPACE__);

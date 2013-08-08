@@ -4,9 +4,13 @@
 
 parameters:
 	repositories:
-#		repositoryName: Namespace\RepositoryClass
+		users: Clevis\Users\UsersRepository
 
 services:
-#	repositoryServiceName:
-#		class: %repositories.repositoryName%
-#		factory: @orm.getRepository(repositoryName)
+	passwordHashCalculator: Clevis\Users\PasswordHashCalculator
+
+	authenticator: Clevis\Users\Authenticator
+
+	usersRepository:
+		class: %repositories.users%
+		factory: @orm::getRepository(users)
