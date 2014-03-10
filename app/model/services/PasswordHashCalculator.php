@@ -39,18 +39,10 @@ class PasswordHashCalculator extends Object
 	 *
 	 * @param string
 	 * @param string
-	 * @param string
 	 * @return bool
 	 */
-	public function verify($password, $hash, $username = NULL)
+	public function verify($password, $hash)
 	{
-		// SHA-1 pro kompatibilitu se stávajícími hesly
-		// todo: nuceně přepočítat?
-		if (strlen($hash) === 40)
-		{
-			return $hash === sha1($username . $password);
-		}
-
 		$passwordHash = crypt($password, $hash);
 
 		return $passwordHash === $hash;
