@@ -13,7 +13,7 @@
 
 	"require": {
 		"php": ">= 5.3.7",
-		"nette/nette": "dev-master"
+		"nette/nette": "2.1.*"
 	},
 
 	"autoload": {
